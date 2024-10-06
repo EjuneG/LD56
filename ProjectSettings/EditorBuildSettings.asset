@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 18b10f6ec1ddaa6478f391cce0f0cbfa
+  - enabled: 1
+    path: Assets/Scenes/Gameplay.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/WinEnding.unity
+    guid: a6761a897c9da2146b1f6db6b4f264eb
+  - enabled: 1
+    path: Assets/Scenes/CrushedEnding.unity
+    guid: 011214c3ca423564783f6d13d9dba976
+  - enabled: 1
+    path: Assets/Scenes/DeadEnding.unity
+    guid: eae8b69ddb5c32140978029bb4863279
+  m_configObjects: {}
