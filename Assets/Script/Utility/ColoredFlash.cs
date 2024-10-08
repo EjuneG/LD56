@@ -68,6 +68,7 @@ public class ColoredFlash : MonoBehaviour
     private IEnumerator FlashRoutine(Color color)
     {
         // Swap to the flashMaterial.
+        if(spriteRenderer.material != null)
         spriteRenderer.material = flashMaterial;
 
         // Set the desired color for the flash.

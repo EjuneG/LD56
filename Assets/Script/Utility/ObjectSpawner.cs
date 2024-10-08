@@ -31,7 +31,7 @@ public class ObjectSpawner : MonoBehaviour
 
     void Update(){
         //if there's less than 5 fruits, spawn more
-        if(fruitParent.transform.childCount < 5){
+        if(fruitParent.transform.childCount < 8){
             RespawnFruits();
         }
 
@@ -137,6 +137,8 @@ public class ObjectSpawner : MonoBehaviour
             GameObject obj = Instantiate(prefab, position, Quaternion.identity);
             obj.transform.SetParent(slimeParent.transform);
             spawnedPositions.Add(position);
+            SlimeNPC slimeNPC = obj.GetComponent<SlimeNPC>();
+            slimeNPC.InitializeAggression();
         }
         else
         {

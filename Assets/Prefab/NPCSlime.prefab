@@ -237,6 +237,7 @@ MonoBehaviour:
   slimeState: 0
   flashEffect: {fileID: 2287309648509242142}
   ballSpawner: {fileID: 7296379485764569206}
+  FruitDetectionRange: 0
   MaxHP: 100
   CurrentHP: 100
   Damage: 10
@@ -402,7 +403,8 @@ MonoBehaviour:
   detector: {fileID: 6023751345802373776}
   slime: {fileID: 2031710303447524308}
   movespeed: 1.25
-  Aggression: 1
+  Aggression: 0
+  <State>k__BackingField: 0
 --- !u!114 &7296379485764569206
 MonoBehaviour:
   m_ObjectHideFlags: 0

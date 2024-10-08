@@ -26615,11 +26615,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1930871973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000004533, y: -87.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 5}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1439399044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26690,11 +26690,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1930871973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000004533, y: -82.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 5}
   m_SizeDelta: {x: 320, y: 5}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1471936256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27042,9 +27042,9 @@ MonoBehaviour:
   BigFruitPrefab: {fileID: 2522431780697313568, guid: 5ebcf04f921723b4fa5ae8051b9a68e1, type: 3}
   GiantFruitPrefab: {fileID: 2522431780697313568, guid: 28f2dfcb95e1f3748aeb3b7a9ca80f26, type: 3}
   parentTransform: {fileID: 1950334696}
-  fruitCount: 20
+  fruitCount: 16
   bigFruitCount: 5
-  giantFruitCount: 2
+  giantFruitCount: 3
   slimeCount: 10
   midSlimeCount: 5
   bigSlimeCount: 2

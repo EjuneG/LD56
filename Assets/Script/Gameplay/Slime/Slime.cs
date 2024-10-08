@@ -11,6 +11,9 @@ public class Slime : MonoBehaviour, ITarget
     public ITarget currentTarget;
     [SerializeField] private ColoredFlash flashEffect;
     [SerializeField] private SpawnEnergyBall ballSpawner;
+    public float FruitDetectionRange;
+    
+    Collider2D collider2D;
 
     [Header("Slime Stats")]
     public float MaxHP;
@@ -31,6 +34,11 @@ public class Slime : MonoBehaviour, ITarget
     public void SwitchStateToEating() => SwitchStateTo(SlimeState.Eating);
     public void SwitchStateToIdle() => SwitchStateTo(SlimeState.Idle);
 
+    private void Start(){
+        collider2D = GetComponent<Collider2D>();
+        CurrentHP = MaxHP;
+        FruitDetectionRange = collider2D.bounds.extents.y;
+    }
     private void OnEnable()
     {
         //Player Event
@@ -60,18 +68,26 @@ public class Slime : MonoBehaviour, ITarget
             }
             else if (slimeState == SlimeState.Eating)
             {
-                if(currentTarget == null){
-                    EndEat();
-                }
                 if (eatSound != null && !audioSource.isPlaying)
                 {
-                    audioSource.PlayOneShot(eatSound);
+                    audioSource.PlayOneShot(eatSound, 1.2f);
                 }
                 currentTarget.TakeDamage(Damage * Time.deltaTime, this);
             }
+        }else{
+            if (slimeState == SlimeState.Eating)
+            {
+                if(GetFruitNearby() == null)
+                {
+                    EndEat();
+                }else {
+                    currentTarget = GetFruitNearby();
+                    Debug.Log($"Current target: {currentTarget}");
+                }
+            }
         }
 
-        //HP regen, 1 HP per second
+        //HP regen
         if (gameObject.CompareTag("Player"))
         {
             RegenHP();
@@ -198,10 +214,22 @@ public class Slime : MonoBehaviour, ITarget
     {
         if (this.gameObject.CompareTag("Player") && other.gameObject.CompareTag("Slime"))
         {
-            Debug.Log($"{other.gameObject.name}");
             Slime otherSlime = other.gameObject.GetComponentInChildren<Slime>();
             otherSlime?.TakeDamage(Damage, this);
         }
+    }
+
+    //check if there is a fruit nearby, check range should be similar to the collider2d radius
+    private ITarget GetFruitNearby(){
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, FruitDetectionRange);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Fruit"))
+            {
+                return collider.GetComponent<ITarget>();
+            }
+        }
+        return null;
     }
 
     public void SwitchStateTo(SlimeState newState)

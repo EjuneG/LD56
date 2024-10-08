@@ -27,6 +27,13 @@ public class SpawnEnergyBall : MonoBehaviour
         for (int i = 0; i < EnergyBall; i++)
         {
             Vector3 spawnPosition = GenerateSpawnPosition();
+            //if spawnPosition is out of border, don't spawn
+            float xBorder = 25f;
+            float yBorder = 25f;
+            if (spawnPosition.x > xBorder || spawnPosition.x < -xBorder || spawnPosition.y > yBorder || spawnPosition.y < -yBorder)
+            {
+                continue;
+            }
             if (spawnPosition != Vector3.zero)
             {
                 GameObject energyBall = Instantiate(EnergyBallPrefab, spawnPosition, Quaternion.identity);

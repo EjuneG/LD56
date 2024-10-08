@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //Controls the behavior of the NPC slimes, they'll find the nearest fruit and eat, sometimes attack weaker slimes (including the player), grow, and run away from huge creatures
@@ -8,12 +9,13 @@ public class SlimeNPC : MonoBehaviour
     [SerializeField] private ObjectDetector detector;
     [SerializeField] private Slime slime;
     [SerializeField] private float movespeed = 1f;
+    [SerializeField] public int Size = 1; //small = 1, medium = 2, big = 3
     public int Aggression = 1; // 0 - passive, 1 - balanced, 2 - aggressive
     private Vector3 moveDirection;
     private BigCreature bigCreatureTarget;
     Fruit nearestFruit = null;
     GameObject nearestBall = null;
-    public NPCState State { get; set; }
+    [field: SerializeField]public NPCState State { get; set; }
     float actionInterval = 3f;
     float actionTimer = 0f;
     float restTimer = 0f;
@@ -75,7 +77,7 @@ public class SlimeNPC : MonoBehaviour
             case NPCState.ChasePlayer:
                 if (playerIsInRange())
                 {
-                    MoveTo(GameManager.Instance.Player.transform.position);
+                    MoveTo(GameManager.Instance.Player.transform.position, 1.2f);
                     chaseTimer += Time.deltaTime;
                     if (Aggression == 1 && chaseTimer > 5f)
                     {
@@ -123,9 +125,21 @@ public class SlimeNPC : MonoBehaviour
     {
         MoveTo(moveDirection);
     }
-    public void MoveTo(Vector3 destination)
+    public void MoveTo(Vector3 destination, float speed = 1f)
     {
-        transform.position = Vector3.MoveTowards(transform.position, destination, movespeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, destination, movespeed * speed * Time.deltaTime);
+    }
+
+    public void InitializeAggression(){
+        if(Size == 1){
+            //aggression is either 0 or 1
+            Aggression = Random.Range(0, 2);
+        }else if(Size == 2){
+            //aggression is either 1 or 2
+            Aggression = Random.Range(1, 3);
+        }else{
+            Aggression = 2;
+    }
     }
 
     public void BeginEscape(BigCreature bigCreature)
@@ -144,14 +158,13 @@ public class SlimeNPC : MonoBehaviour
             State = NPCState.Idle;
             return;
         }
-        Debug.Log("Someone is escaping");
         Vector3 direction = (bigCreatureTarget.transform.position - transform.position).normalized;
         transform.position -= direction * Time.deltaTime * movespeed * 2;
     }
     public void UpdateDirection()
     {
         //move to a location near current location
-        moveDirection = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.x + Random.Range(-1f, 1f), 0);
+        moveDirection = new Vector3(transform.position.x + Random.Range(-2f, 2f), transform.position.x + Random.Range(-2f, 2f), 0);
     }
 
     private void LocateNearestFruit()
